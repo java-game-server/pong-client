@@ -2,8 +2,8 @@ package com.apporelbotna.gameserver.pongclient;
 
 import java.net.Socket;
 
+import com.apporelbotna.gameserver.pongserver.stubs.GameStatusMessage;
 import com.apporelbotna.gameserver.pongserver.stubs.Player;
-import com.apporelbotna.gameserver.pongserver.stubs.ServerMessage;
 
 // to beeee is to refactor meeee
 public class GameFinder
@@ -24,21 +24,21 @@ public class GameFinder
 			serverConnection.write("palomino");
 
 			String serverMsg;
-			ServerMessage serverMessage = null;
+			GameStatusMessage gameStatusMessage = null;
 			while((serverMsg = serverConnection.readLine()) != null)
 			{
-				if(serverMsg.startsWith("{"))
+				if(GameStatusMessage.canCreateFromJson(serverMsg))
 				{
-					serverMessage = ServerMessage.fromJson(serverMsg);
+					gameStatusMessage = GameStatusMessage.fromJson(serverMsg);
 					break;
 				}
 				System.out.println(serverMsg);
 			}
-			if(serverMessage != null)
+			if(gameStatusMessage != null)
 			{
 				PongClientController gameController = new PongClientController(
 						new Player("cabronazo"),
-						serverMessage.getEnemy(),
+						gameStatusMessage.getEnemy(),
 						serverConnection);
 
 				gameController.beginGameLoop();

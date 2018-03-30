@@ -4,9 +4,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import com.apporelbotna.gameserver.pongclient.view.PongGameView;
+import com.apporelbotna.gameserver.pongserver.stubs.GameStatusMessage;
 import com.apporelbotna.gameserver.pongserver.stubs.Player;
 import com.apporelbotna.gameserver.pongserver.stubs.PlayerMovementMessage;
-import com.apporelbotna.gameserver.pongserver.stubs.ServerMessage;
 
 public class PongClientController
 {
@@ -24,16 +24,16 @@ public class PongClientController
 
 	public void beginGameLoop()
 	{
-		ServerMessage serverMessage = ServerMessage.fromJson(serverConnection.readLine());
-		while( ! serverMessage.isGameFinished())
+		GameStatusMessage gameStatusMessage = GameStatusMessage.fromJson(serverConnection.readLine());
+		while( ! gameStatusMessage.isGameFinished())
 		{
 			pongGameView.updateActorLocations(
-					serverMessage.getPlayer().getPosition(),
-					serverMessage.getEnemy().getPosition(),
-					serverMessage.getBall().getPosition().X,
-					serverMessage.getBall().getPosition().Y);
+					gameStatusMessage.getPlayer().getPosition(),
+					gameStatusMessage.getEnemy().getPosition(),
+					gameStatusMessage.getBall().getPosition().X,
+					gameStatusMessage.getBall().getPosition().Y);
 			pongGameView.repaint();
-			serverMessage = ServerMessage.fromJson(serverConnection.readLine());
+			gameStatusMessage = GameStatusMessage.fromJson(serverConnection.readLine());
 		}
 	}
 
