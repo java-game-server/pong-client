@@ -1,10 +1,7 @@
 package com.apporelbotna.gameserver.pongclient;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.net.Socket;
 
-import com.apporelbotna.gameserver.pongclient.view.PongGameView;
 import com.apporelbotna.gameserver.pongserver.stubs.Player;
 import com.apporelbotna.gameserver.pongserver.stubs.ServerMessage;
 
@@ -17,20 +14,18 @@ public class GameFinder
 		// launcher
 		// De esta instancia se pasara el username al server y la ref al PongGameView
 
+		// AuthenticatedPlayer.getInstance().setPlayer( new Player( USERNAME RECIBIDO ) )
+
 		try (Socket clientSocket = new Socket("localhost", 5555))
 		{
 			System.out.println("Client: " + "Connection Established");
 
 			ServerConnection serverConnection = new ServerConnection(clientSocket);
-			BufferedReader reader = serverConnection.getReader();
-			BufferedWriter writer = serverConnection.getWriter();
-
-			writer.write("palomino\n");
-			writer.flush();
+			serverConnection.write("palomino");
 
 			String serverMsg;
 			ServerMessage serverMessage = null;
-			while((serverMsg = reader.readLine()) != null)
+			while((serverMsg = serverConnection.readLine()) != null)
 			{
 				if(serverMsg.startsWith("{"))
 				{
@@ -41,8 +36,12 @@ public class GameFinder
 			}
 			if(serverMessage != null)
 			{
-				PongGameView game = new PongGameView(new Player("cabronazo"), serverMessage.getEnemy());
-				game.launch();
+				PongClientController gameController = new PongClientController(
+						new Player("cabronazo"),
+						serverMessage.getEnemy(),
+						serverConnection);
+
+				gameController.beginGameLoop();
 			}
 		}
 		catch (Exception e)
