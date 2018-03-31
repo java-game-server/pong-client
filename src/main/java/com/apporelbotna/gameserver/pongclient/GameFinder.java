@@ -5,7 +5,7 @@ import java.net.Socket;
 import com.apporelbotna.gameserver.pongserver.stubs.GameStatusMessage;
 import com.apporelbotna.gameserver.pongserver.stubs.Player;
 
-// to beeee is to refactor meeee
+// REFACTOR meeee
 public class GameFinder
 {
 	public static void main(String[] args)
