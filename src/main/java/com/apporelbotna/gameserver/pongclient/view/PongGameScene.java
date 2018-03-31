@@ -6,8 +6,8 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
-import com.apporelbotna.gameserver.pongserver.stubs.Drawable;
-import com.apporelbotna.gameserver.pongserver.stubs.PongGame;
+import com.apporelbotna.gameserver.pongserver.stubs.model.Drawable;
+import com.apporelbotna.gameserver.pongserver.stubs.model.PongGame;
 
 public class PongGameScene extends JPanel
 {

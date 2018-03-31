@@ -5,9 +5,9 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 
-import com.apporelbotna.gameserver.pongserver.stubs.Player;
-import com.apporelbotna.gameserver.pongserver.stubs.PongGame;
-import com.apporelbotna.gameserver.pongserver.stubs.Vector2;
+import com.apporelbotna.gameserver.pongserver.stubs.model.Player;
+import com.apporelbotna.gameserver.pongserver.stubs.model.PongGame;
+import com.apporelbotna.gameserver.pongserver.stubs.model.Vector2;
 
 public class PongGameView
 {

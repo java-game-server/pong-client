@@ -1,6 +1,6 @@
 package com.apporelbotna.gameserver.pongclient;
 
-import com.apporelbotna.gameserver.pongserver.stubs.Player;
+import com.apporelbotna.gameserver.pongserver.stubs.model.Player;
 
 public class AuthenticatedPlayer
 {

@@ -3,8 +3,8 @@ package com.apporelbotna.gameserver.pongclient;
 import java.io.IOException;
 import java.net.Socket;
 
-import com.apporelbotna.gameserver.pongserver.stubs.PlayerMovementMessage;
-import com.apporelbotna.gameserver.pongserver.stubs.SocketConnection;
+import com.apporelbotna.gameserver.pongserver.stubs.net.PlayerMovementMessage;
+import com.apporelbotna.gameserver.pongserver.stubs.net.SocketConnection;
 
 public class ServerConnection extends SocketConnection
 {

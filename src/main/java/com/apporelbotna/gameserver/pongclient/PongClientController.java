@@ -4,9 +4,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import com.apporelbotna.gameserver.pongclient.view.PongGameView;
-import com.apporelbotna.gameserver.pongserver.stubs.GameStatusMessage;
-import com.apporelbotna.gameserver.pongserver.stubs.Player;
-import com.apporelbotna.gameserver.pongserver.stubs.PlayerMovementMessage;
+import com.apporelbotna.gameserver.pongserver.stubs.model.Player;
+import com.apporelbotna.gameserver.pongserver.stubs.net.GameStatusMessage;
+import com.apporelbotna.gameserver.pongserver.stubs.net.PlayerMovementMessage;
 
 public class PongClientController
 {

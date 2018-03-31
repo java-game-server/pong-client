@@ -2,8 +2,8 @@ package com.apporelbotna.gameserver.pongclient;
 
 import java.net.Socket;
 
-import com.apporelbotna.gameserver.pongserver.stubs.GameStatusMessage;
-import com.apporelbotna.gameserver.pongserver.stubs.Player;
+import com.apporelbotna.gameserver.pongserver.stubs.model.Player;
+import com.apporelbotna.gameserver.pongserver.stubs.net.GameStatusMessage;
 
 // REFACTOR meeee
 public class GameFinder
