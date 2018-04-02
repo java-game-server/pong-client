@@ -30,7 +30,7 @@ public class GameFinder
 			logger.info("Connection established!");
 
 			ServerConnection serverConnection = new ServerConnection(clientSocket);
-			serverConnection.write("palomino");
+			// serverConnection.write("palomino");
 
 			String serverMsg;
 			GameStatusMessage gameStatusMessage = null;
