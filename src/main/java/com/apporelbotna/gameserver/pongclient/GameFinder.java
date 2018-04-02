@@ -2,12 +2,19 @@ package com.apporelbotna.gameserver.pongclient;
 
 import java.net.Socket;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.apporelbotna.gameserver.pongclient.properties.ApplicationProperties;
+import com.apporelbotna.gameserver.pongserver.model.GameControllerThread;
 import com.apporelbotna.gameserver.pongserver.stubs.model.Player;
 import com.apporelbotna.gameserver.pongserver.stubs.net.GameStatusMessage;
 
 // REFACTOR meeee
 public class GameFinder
 {
+	private static final Logger logger = LoggerFactory.getLogger(GameControllerThread.class);
+
 	public static void main(String[] args)
 	{
 		// TODO crear una instancia de Player a traves de las credenciales que ?pasara por comando? el
@@ -16,9 +23,11 @@ public class GameFinder
 
 		// AuthenticatedPlayer.getInstance().setPlayer( new Player( USERNAME RECIBIDO ) )
 
-		try (Socket clientSocket = new Socket("localhost", 5555))
+		try (Socket clientSocket = new Socket(
+				ApplicationProperties.getServerIp(),
+				ApplicationProperties.getServerSocketPort()))
 		{
-			System.out.println("Client: " + "Connection Established");
+			logger.info("Connection established!");
 
 			ServerConnection serverConnection = new ServerConnection(clientSocket);
 			serverConnection.write("palomino");
@@ -32,7 +41,7 @@ public class GameFinder
 					gameStatusMessage = GameStatusMessage.fromJson(serverMsg);
 					break;
 				}
-				System.out.println(serverMsg);
+				logger.info(serverMsg);
 			}
 			if(gameStatusMessage != null)
 			{
@@ -46,7 +55,7 @@ public class GameFinder
 		}
 		catch (Exception e)
 		{
-			e.printStackTrace();
+			logger.error(e.getMessage());
 		}
 	}
 }
