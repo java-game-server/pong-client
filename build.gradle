@@ -25,7 +25,7 @@ dependencies {
 	compile 'com.github.java-game-server:pong-server:0.3.1'
 	
 	// PersistenceWS Stubs
-	compile 'com.github.java-game-server:stubs:0.2.5'
+	compile 'com.github.java-game-server:stubs:0.3.0'
 
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
     implementation 'com.google.guava:guava:21.0'
