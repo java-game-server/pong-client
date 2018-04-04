@@ -9,6 +9,9 @@ import com.apporelbotna.gameserver.pongclient.properties.ApplicationProperties;
 import com.apporelbotna.gameserver.pongserver.model.GameControllerThread;
 import com.apporelbotna.gameserver.pongserver.stubs.model.Player;
 import com.apporelbotna.gameserver.pongserver.stubs.net.GameStatusMessage;
+import com.apporelbotna.gameserver.stubs.Token;
+import com.apporelbotna.gameserver.stubs.User;
+import com.apporelbotna.gameserver.stubs.UserWrapper;
 
 // REFACTOR meeee
 public class GameFinder
@@ -17,11 +20,11 @@ public class GameFinder
 
 	public static void main(String[] args)
 	{
+		String playerEmail = args[0];
+		String playerToken = args[1];
 		// TODO crear una instancia de Player a traves de las credenciales que ?pasara por comando? el
 		// launcher
 		// De esta instancia se pasara el username al server y la ref al PongGameView
-
-		// AuthenticatedPlayer.getInstance().setPlayer( new Player( USERNAME RECIBIDO ) )
 
 		try (Socket clientSocket = new Socket(
 				ApplicationProperties.getServerIp(),
@@ -30,7 +33,10 @@ public class GameFinder
 			logger.info("Connection established!");
 
 			ServerConnection serverConnection = new ServerConnection(clientSocket);
-			// serverConnection.write("palomino");
+
+			// TODO uncomment when client ready
+			// serverConnection.write(playerEmail);
+			// serverConnection.write(playerToken);
 
 			String serverMsg;
 			GameStatusMessage gameStatusMessage = null;
@@ -46,7 +52,7 @@ public class GameFinder
 			if(gameStatusMessage != null)
 			{
 				PongClientController gameController = new PongClientController(
-						new Player("cabronazo"),
+						new Player(new UserWrapper(new User(playerEmail), new Token(playerToken))),
 						gameStatusMessage.getEnemy(),
 						serverConnection);
 
