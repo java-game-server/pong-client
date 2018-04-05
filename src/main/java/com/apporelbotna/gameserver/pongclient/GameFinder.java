@@ -22,39 +22,33 @@ public class GameFinder
 	{
 		String playerEmail = args[0];
 		String playerToken = args[1];
-		// TODO crear una instancia de Player a traves de las credenciales que ?pasara por comando? el
-		// launcher
-		// De esta instancia se pasara el username al server y la ref al PongGameView
 
-		try (Socket clientSocket = new Socket(
-				ApplicationProperties.getServerIp(),
+		try (Socket clientSocket = new Socket(ApplicationProperties.getServerIp(),
 				ApplicationProperties.getServerSocketPort()))
 		{
 			logger.info("Connection established!");
 
 			ServerConnection serverConnection = new ServerConnection(clientSocket);
 
-			// TODO uncomment when client ready
-			// serverConnection.write(playerEmail);
-			// serverConnection.write(playerToken);
+			serverConnection.write(playerEmail);
+			serverConnection.write(playerToken);
 
 			String serverMsg;
 			GameStatusMessage gameStatusMessage = null;
-			while((serverMsg = serverConnection.readLine()) != null)
+			while ((serverMsg = serverConnection.readLine()) != null)
 			{
-				if(GameStatusMessage.canCreateFromJson(serverMsg))
+				if (GameStatusMessage.canCreateFromJson(serverMsg))
 				{
 					gameStatusMessage = GameStatusMessage.fromJson(serverMsg);
 					break;
 				}
 				logger.info(serverMsg);
 			}
-			if(gameStatusMessage != null)
+			if (gameStatusMessage != null)
 			{
 				PongClientController gameController = new PongClientController(
 						new Player(new UserWrapper(new User(playerEmail), new Token(playerToken))),
-						gameStatusMessage.getEnemy(),
-						serverConnection);
+						gameStatusMessage.getEnemy(), serverConnection);
 
 				gameController.beginGameLoop();
 			}
