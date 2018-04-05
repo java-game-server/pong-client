@@ -22,9 +22,9 @@ repositories {
 
 dependencies {
 	// PongServer
-	compileOnly 'com.github.java-game-server:pong-server:1.0.0'
+	compileOnly 'com.github.java-game-server:pong-server:1.0.2'
 	
-	compileOnly 'com.github.java-game-server:ws-java-client:3.0.1'
+	compileOnly 'com.github.java-game-server:ws-java-client:3.0.2'
 	
 	// https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12
 	testCompile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.25'
@@ -36,6 +36,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     
     // https://mvnrepository.com/artifact/com.google.code.gson/gson
-	compile group: 'com.google.code.gson', name: 'gson', version: '2.8.2'
+	compileOnly group: 'com.google.code.gson', name: 'gson', version: '2.8.2'
 }
 
