@@ -22,7 +22,7 @@ repositories {
 
 dependencies {
 	// PongServer
-	compileOnly 'com.github.java-game-server:pong-server:1.0.6'
+	compileOnly 'com.github.java-game-server:pong-server:1.0.7'
 	
 	compileOnly 'com.github.java-game-server:ws-java-client:3.0.5'
 	
